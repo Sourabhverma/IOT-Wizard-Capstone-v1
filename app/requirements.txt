@@ -1,0 +1,4 @@
+Flask-PyMongo
+Flask~=2.0.0
+dnspython
+requests==2.20.1
