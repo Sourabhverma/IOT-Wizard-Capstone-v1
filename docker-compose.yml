@@ -63,7 +63,7 @@ services:
       CONNECT_PLUGIN_PATH: '/usr/share/java,/etc/kafka-connect/jars,/data/connectors/'
       CONNECT_CONFLUENT_TOPIC_REPLICATION_FACTOR: 1
     volumes:
-      - /tmp/custom/jars:/etc/kafka-connect/jars
+      - ./Jars:/etc/kafka-connect/jars
     depends_on:
       - zookeeper
       - kafka

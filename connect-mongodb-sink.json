@@ -4,7 +4,7 @@
         "connector.class": "at.grahsl.kafka.connect.mongodb.MongoDbSinkConnector",
         "tasks.max": 1,
         "topics": "connect-custom",
-        "mongodb.connection.uri": "mongodb://root:secret@mongodb:27017/iotdb?retryWrites=true",
+        "mongodb.connection.uri": "mongodb://root:secret@mongodb:27017/iotdb?authSource=admin&retryWrites=true",
         "mongodb.collection": "MyCollection",
         "key.converter": "org.apache.kafka.connect.json.JsonConverter",
         "key.converter.schemas.enable": false,

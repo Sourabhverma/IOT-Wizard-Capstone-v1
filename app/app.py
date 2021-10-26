@@ -1,15 +1,13 @@
-import datetime
 import os
-import sys
 from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
 
 application = Flask(__name__)
-# application.config["MONGO_URI"] = 'mongodb://' + os.environ['MONGO_INITDB_ROOT_USERNAME'] + ':' + os.environ[
-#     'MONGO_INITDB_ROOT_PASSWORD'] + '@' + os.environ['MONGODB_HOSTNAME'] + ':27017/' + os.environ[
-#                                       'MONGODB_DATABASE'] + '?authSource=admin'
+application.config["MONGO_URI"] = 'mongodb://' + os.environ['MONGO_INITDB_ROOT_USERNAME'] + ':' + os.environ[
+    'MONGO_INITDB_ROOT_PASSWORD'] + '@' + os.environ['MONGODB_HOSTNAME'] + ':27017/' + os.environ[
+                                      'MONGODB_DATABASE'] + '?authSource=admin'
 
-application.config['MONGO_URI'] = 'mongodb://root:secret@127.0.0.1:27017/iotdb?authSource=admin'
+# application.config['MONGO_URI'] = 'mongodb://root:secret@127.0.0.1:27017/iotdb?authSource=admin'
 
 mongo = PyMongo(application)
 

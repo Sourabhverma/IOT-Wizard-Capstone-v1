@@ -12,8 +12,8 @@ topic = "baeldung"
 client_id = f'python-mqtt-{random.randint(0, 1000)}'
 # username = 'emqx'
 # password = 'public'
-cities = ["Pune-1", "Bangalore-1", "Pune-2", "Bangalore-2", "Bangalore-3"]
-binStatus = ["Full", "Empty", "half", "Quarter", "three-quarter"]
+cities = ["pune-1", "bangalore-1", "pune-2", "bangalore-2", "bangalore-3"]
+binStatus = ["full", "empty", "half", "quarter", "three-quarter"]
 
 latitude_list = [30.3358376, 30.307977, 30.3216419, 30.3427904,
                  30.378598, 30.3548185, 30.3345816, 30.387299,
@@ -49,14 +49,14 @@ def subscribe(client: mqtt_client):
 
 
 def publish(client):
-    for j in range(100):
+    for j in range(10):
         time.sleep(1)
         print("Iteration", j)
-        msg = {"datetime": datetime.now().strftime("%d/%m/%Y %H:%M:%S"),
+        msg = {"datetime": datetime.now().strftime("%d:%m:%Y-%H:%M:%S"),
                     "bin_id": j,
                     "status": random.choice(binStatus),
                     "region": random.choice(cities),
-                    "gelocation": {random.choice(latitude_list), random.choice(longitude_list)}}
+                    "gelocation": [random.choice(latitude_list), random.choice(longitude_list)]}
 
         m= "{\"id\":1234,\"message\":\"This is a test\"}"
         result = client.publish(topic, json.dumps(str(m)))
