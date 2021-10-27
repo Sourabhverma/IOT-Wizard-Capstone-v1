@@ -10,6 +10,8 @@ application.config["MONGO_URI"] = 'mongodb://' + os.environ['MONGO_INITDB_ROOT_U
 # application.config['MONGO_URI'] = 'mongodb://root:secret@127.0.0.1:27017/iotdb?authSource=admin'
 
 mongo = PyMongo(application)
+print("#########  Flask Server Started ##########")
+print(mongo.db)
 
 #db_operations = mongo.db.<COLLECTION_NAME>
 dumpbin_db= mongo.db.dumpbins
@@ -56,7 +58,7 @@ def get_all_bins_alert():
     count_row = (dumpbin_db.count() - 1) if dumpbin_db.count() > 0 else False
     if not count_row:
         print("No Dumpbins status updated and tracked")
-        return
+        return  ({'result': None})
     elif not dumpbin_db.find({'region': region, 'status': status}).count():
         print("For region {} No Dumpbins is {}".format(region,status))
         return ({'result': None})
