@@ -97,7 +97,7 @@ services:
       - mongodb
 
   mongodb:
-    image: mongo
+    image: mongo:4.0.5
     container_name: mongodb
     restart: unless-stopped
     command: mongod --auth
