@@ -9,7 +9,7 @@ import time
 # Define Variables
 broker = '127.0.0.1'
 port = 1883
-topic = "baeldung"
+topic = "mqtt-Iot"
 # generate client ID with pub prefix randomly
 client_id = f'python-mqtt-{random.randint(0, 1000)}'
 # username = 'emqx'
@@ -50,7 +50,7 @@ def subscribe(client: mqtt_client):
     client.on_message = on_message
 
 
-def publish(client):
+def simulated_publish(client):
     for j in range(1,10):
         time.sleep(1)
         print("Iteration", j)
@@ -70,10 +70,36 @@ def publish(client):
             print(f"Failed to send message to topic {topic}")
 
 
+# def data_publish(client):
+#     '''
+#     Set Data as per below format
+#     Populate msg object as below
+#     :param client:
+#
+#     binStatus = ["full", "empty", "half", "quarter", "three-quarter"]
+#     :return:
+#     '''
+#
+#     msg = {"datetime": str(datetime.now().strftime("%d:%m:%Y-%H:%M:%S")),
+#            "bin_id": str(101),
+#            "status": str(binStatus),
+#            "region": str(city_code),
+#            "gelocation": [str(latitude), str(longitude)]}
+#
+#     msg.update({'_id': "{}-{}".format(msg.get("bin_id"), msg.get("datetime"))})
+#     result = client.publish(topic, json.dumps(msg))
+#
+#     status = result[0]
+#     if status == 0:
+#         print(f"Send `{msg}` to topic `{topic}`")
+#     else:
+#         print(f"Failed to send message to topic {topic}")
+
 def run():
     client = connect_mqtt()
     client.loop_start()
-    publish(client)
+    simulated_publish(client)
+    # data_publish(client)
 
 
 if __name__ == '__main__':
