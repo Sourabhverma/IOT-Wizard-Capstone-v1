@@ -7,7 +7,7 @@ import random
 import time
 
 # Define Variables
-broker = '127.0.0.1'
+broker = '23.20.144.58'
 port = 1883
 topic = "mqtt-Iot"
 # generate client ID with pub prefix randomly
