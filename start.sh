@@ -13,7 +13,7 @@ docker-compose up --build -d
 echo "\n#################################################################################\n"
 echo " Docker Deployment for  MQTT , KAFFA and Mongo DB successful"
 echo "\n#################################################################################\n"
-sleep 2m 30s
+sleep 1m 10s
 
 echo "\n#################################################################################\n"
 echo "Cleanup Connectors Trash"
