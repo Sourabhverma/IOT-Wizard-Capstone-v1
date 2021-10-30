@@ -97,7 +97,7 @@ services:
       - mongodb
 
   mongodb:
-    image: mongo:4.0.5
+    image: mongo
     container_name: mongodb
     restart: unless-stopped
     command: mongod --auth
@@ -110,8 +110,8 @@ services:
       MONDODB_LOG_DIR: /dev/null
     volumes:
       - mongodbdata:/data/db
-    networks:
-      - backend
+#    networks:
+#      - backend
     expose:
       - "27017"
     ports:

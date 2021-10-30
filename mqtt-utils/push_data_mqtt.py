@@ -1,3 +1,5 @@
+import json
+
 from paho.mqtt import client as mqtt_client
 import json
 from datetime import datetime
@@ -49,18 +51,20 @@ def subscribe(client: mqtt_client):
 
 
 def publish(client):
-    for j in range(10):
+    for j in range(1,10):
         time.sleep(1)
         print("Iteration", j)
-        msg = {"datetime": datetime.now().strftime("%d:%m:%Y-%H:%M:%S"),
-                    "bin_id": j,
-                    "status": random.choice(binStatus),
-                    "region": random.choice(cities),
-                    "gelocation": [random.choice(latitude_list), random.choice(longitude_list)]}
+        msg = {"datetime": str(datetime.now().strftime("%d:%m:%Y-%H:%M:%S")),
+               "bin_id": str(j),
+               "status": str(random.choice(binStatus)),
+               "region": str(random.choice(cities)),
+               "gelocation": [str(random.choice(latitude_list)), str(random.choice(longitude_list))]}
 
-        m= "{\"id\":1234,\"message\":\"This is a test\"}"
-        result = client.publish(topic, json.dumps(str(m)))
+        m = "{\"id\":1234,\"message\":\"This is a test\"}"
+
+        result = client.publish(topic,json.dumps(msg))
         # result: [0, 1]
+
         status = result[0]
         if status == 0:
             print(f"Send `{msg}` to topic `{topic}`")

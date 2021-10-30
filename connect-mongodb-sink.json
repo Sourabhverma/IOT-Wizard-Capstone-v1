@@ -5,7 +5,7 @@
         "tasks.max": 1,
         "topics": "connect-custom",
         "mongodb.connection.uri": "mongodb://root:secret@mongodb:27017/iotdb?authSource=admin&retryWrites=true",
-        "mongodb.collection": "MyCollection",
+        "mongodb.collection": "dumpbins",
         "key.converter": "org.apache.kafka.connect.json.JsonConverter",
         "key.converter.schemas.enable": false,
         "value.converter": "org.apache.kafka.connect.json.JsonConverter",

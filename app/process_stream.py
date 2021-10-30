@@ -6,7 +6,7 @@ from time import sleep
 # import app
 
 consumer = KafkaConsumer(
-    'topic_set_bin_status',
+    'connect-custom',
     bootstrap_servers=['localhost:9092'],
     auto_offset_reset='earliest',
     enable_auto_commit=True,
@@ -15,6 +15,7 @@ consumer = KafkaConsumer(
 )
 print("kafa stream processor started")
 for event in consumer:
+    print(event)
     event_data = event.value
     # Do whatever you want
     print(event_data)
