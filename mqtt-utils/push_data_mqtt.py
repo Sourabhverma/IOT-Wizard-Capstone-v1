@@ -60,10 +60,8 @@ def publish(client):
                "region": str(random.choice(cities)),
                "gelocation": [str(random.choice(latitude_list)), str(random.choice(longitude_list))]}
 
-        m = "{\"id\":1234,\"message\":\"This is a test\"}"
-
+        msg.update({'_id': "{}-{}".format(msg.get("bin_id"), msg.get("datetime"))})
         result = client.publish(topic,json.dumps(msg))
-        # result: [0, 1]
 
         status = result[0]
         if status == 0:
