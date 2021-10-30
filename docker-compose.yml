@@ -90,9 +90,9 @@ services:
       - appdata:/var/www
     depends_on:
       - mongodb
-    networks:
-      - frontend
-      - backend
+#    networks:
+#      - frontend
+#      - backend
     links:
       - mongodb
 
@@ -170,8 +170,8 @@ services:
       - nginxdata:/var/log/nginx
     depends_on:
       - flask
-    networks:
-      - frontend
+#    networks:
+#      - frontend
 
 networks:
   frontend:
