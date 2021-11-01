@@ -7,7 +7,7 @@ import random
 import time
 
 # Define Variables
-broker = '23.20.144.58'
+broker = '54.82.70.158'
 port = 1883
 topic = "mqtt-Iot"
 # generate client ID with pub prefix randomly
@@ -16,6 +16,22 @@ client_id = f'python-mqtt-{random.randint(0, 1000)}'
 # password = 'public'
 cities = ["pune-1", "bangalore-1", "pune-2", "bangalore-2", "bangalore-3"]
 binStatus = ["full", "empty", "half", "quarter", "three-quarter"]
+
+
+# pune = { "pune_baner" :[18.570833868305556, 73.77448819855145],"pune_pancard" : [18.561069600862393, 73.7838009534555],
+#          "pune_balewadi": [18.566602470640955, 73.78599005770796]}
+#
+# bangalore = {"bangalore_marathali":[12.966863323570541, 77.70265004750561],"bangalore_hall_airport":[12.950176604086646, 77.68076224631193],
+#             "bangalore_ferncity": [12.975674797436094, 77.6978237520109]}
+
+region_to_loc = [{"bin_id": "101", "region": "pune", "location": [18.570833868305556, 73.77448819855145]},
+                       {"bin_id": "102", "region": "pune", "location": [18.561069600862393, 73.7838009534555]},
+                       {"bin_id": "103", "region": "pune", "location": [18.566602470640955, 73.78599005770796]},
+                       {"bin_id": "104", "region": "bangalore", "location": [12.966863323570541, 77.70265004750561]},
+                       {"bin_id": "105", "region": "bangalore", "location": [12.950176604086646, 77.68076224631193]},
+                       {"bin_id": "106", "region": "bangalore", "location": [12.975674797436094, 77.6978237520109]}
+                       ]
+
 
 latitude_list = [30.3358376, 30.307977, 30.3216419, 30.3427904,
                  30.378598, 30.3548185, 30.3345816, 30.387299,
@@ -54,11 +70,19 @@ def simulated_publish(client):
     for j in range(1,10):
         time.sleep(1)
         print("Iteration", j)
+
+        # msg = {"datetime": str(datetime.now().strftime("%d:%m:%Y-%H:%M:%S")),
+        #        "bin_id": str(j),
+        #        "status": str(random.choice(binStatus)),
+        #        "region": str(random.choice(cities)),
+        #        "gelocation": [str(random.choice(latitude_list)), str(random.choice(longitude_list))]}
+
+        city = random.choice(region_to_loc)
         msg = {"datetime": str(datetime.now().strftime("%d:%m:%Y-%H:%M:%S")),
-               "bin_id": str(j),
+               "bin_id": str(city.get("bin_id")),
                "status": str(random.choice(binStatus)),
-               "region": str(random.choice(cities)),
-               "gelocation": [str(random.choice(latitude_list)), str(random.choice(longitude_list))]}
+               "region": str(city.get("region")),
+               "gelocation": [str(city.get("location")[0]), str(city.get("location")[1])]}
 
         msg.update({'_id': "{}-{}".format(msg.get("bin_id"), msg.get("datetime"))})
         result = client.publish(topic,json.dumps(msg))
